@@ -11,12 +11,12 @@ WITH both_store_apps AS (SELECT ios.name, ios.rating AS ios_rating,
 						AND android IS NOT NULL
 						ORDER BY ios_rating DESC),
 
-	 top_20 AS (SELECT *
+	 top_10 AS (SELECT *
 				FROM both_store_apps
 				WHERE android_rating >= (SELECT ROUND(AVG(android_rating)) FROM both_store_apps)
 				AND ios_rating >= (SELECT ROUND(AVG(ios_rating)) FROM both_store_apps)
 				ORDER BY android_price ASC
-				LIMIT 20)
+				LIMIT 10 OFFSET 14)
 
 SELECT *
-FROM top_20;
+FROM top_10;
